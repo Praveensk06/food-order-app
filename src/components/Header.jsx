@@ -3,7 +3,9 @@ import Logo from "../img/logo.png";
 import Avatar from "../img/avatar.png";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { MdShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
+import { MdAdd, MdLogout } from "react-icons/md";
+
+import { BsMinecartLoaded } from "react-icons/bs";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useStateValue } from "../context/StateProvider";
 import { app } from "../firebase.config";
@@ -21,7 +23,7 @@ const Header = () => {
   const login = async () => {
     if (!user) {
       const {
-        user: { refreshToken, providerData },
+        user: { providerData },
       } = await signInWithPopup(fireBaseAuth, provider);
       dispatch({
         type: actionType.SET_USER,
@@ -64,12 +66,13 @@ const Header = () => {
         <div className="flex items-center gap-8">
           {/* list  */}
           <ul className="flex items-center gap-8">
-            <li
+            <Link
+              to={"/"}
               className="text-base text-textColor hover:text-headingColor duration-100 ease-in-out cursor-pointer"
               onClick={() => setIsMenu(false)}
             >
               Home
-            </li>
+            </Link>
           </ul>
 
           {/* cart info */}
@@ -77,7 +80,7 @@ const Header = () => {
             className="relative flex items-center justify-center "
             onClick={showCart}
           >
-            <MdShoppingBasket className="text-textColor text-2xl  cursor-pointer" />
+            <BsMinecartLoaded className="text-textColor text-2xl  cursor-pointer" />
             {cartItems && cartItems.length > 0 && (
               <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg">
                 <p className=" text-xs text-white font-semibold flex items-center justify-center text-center">
@@ -130,7 +133,7 @@ const Header = () => {
           onClick={showCart}
         >
           {/* shop logo */}
-          <MdShoppingBasket className="text-textColor text-2xl  cursor-pointer" />
+          <BsMinecartLoaded className="text-textColor text-2xl  cursor-pointer" />
           {cartItems && cartItems.length > 0 && (
             <div className=" absolute -top-2 -right-2 w-5 h-5 rounded-full bg-cartNumBg">
               <p className=" text-xs text-white font-semibold flex items-center justify-center text-center">
@@ -142,7 +145,7 @@ const Header = () => {
         {/* logo  */}
         <Link to={"/"} className="flex items-center gap-2">
           <img className="w-8 object-cover" src={Logo} alt="logo" />
-          <p className="text-headingColor text-xl font-bold">city</p>
+          <p className="text-headingColor text-xl font-bold">QuickPlate</p>
         </Link>
         {/* avatar img */}
         <div className="relative">
@@ -166,21 +169,12 @@ const Header = () => {
               )}
 
               <ul className="flex flex-col px-4 py-2  ">
-                <link
+                <Link
                   to="/"
                   className="text-base text-textColor hover:text-headingColor duration-100 ease-in-out cursor-pointer hover:bg-slate-100"
                 >
                   Home
-                </link>
-                <li className="text-base text-textColor hover:text-headingColor duration-100 ease-in-out cursor-pointer hover:bg-slate-100">
-                  Menu
-                </li>
-                <li className="text-base text-textColor hover:text-headingColor duration-100 ease-in-out cursor-pointer hover:bg-slate-100">
-                  About Us
-                </li>
-                <li className="text-base text-textColor hover:text-headingColor duration-100 ease-in-out cursor-pointer">
-                  Service
-                </li>
+                </Link>
               </ul>
               <p
                 className="m-2 p-2 rounded-md shadow-md items-center flex justify-center gap-3 cursor-pointer hover:bg-gray-500 transition-all duration-100 ease-in-out text-textColor text-base"

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { MdShoppingBasket } from "react-icons/md";
+import { MdAddShoppingCart } from "react-icons/md";
 import { actionType } from "../context/Reducer";
 import { useStateValue } from "../context/StateProvider";
 import NotFound from "../img/empty-cart.gif";
@@ -55,10 +55,10 @@ const RowContainer = ({ flag, data, scrollValue }) => {
               </div>
 
               <div
-                className="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center cursor-pointer hover:shadow-md"
+                className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center cursor-pointer hover:shadow-md"
                 onClick={() => setItems([...cartItems, item])}
               >
-                <MdShoppingBasket className="text-white" />
+                <MdAddShoppingCart className="text-white" />
               </div>
             </div>
             <div className="w-full flex flex-col  items-end justify-end">
